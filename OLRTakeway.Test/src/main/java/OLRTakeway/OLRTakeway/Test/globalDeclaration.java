@@ -5,6 +5,7 @@ public class globalDeclaration {
 	// Public global declaration file
 	public static String globalDeclarationFile = System.getProperty("user.dir")+"\\inputDataFiles\\globalvariable.xlsx";
 	
+	//Test Result File
 	public static String testResultFile = System.getProperty("user.dir")+"\\inputDataFiles\\TestResult.xlsx";
 	
 	// chromeExePath
