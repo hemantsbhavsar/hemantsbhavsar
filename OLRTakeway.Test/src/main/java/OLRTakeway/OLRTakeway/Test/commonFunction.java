@@ -119,6 +119,110 @@ public class commonFunction {
 		 
 		 //-------------------------------------------
 		 
+		 public void updateTestResult(String testcaseNumber, String testcaseStatus ,String remark)
+		 {
+			 XSSFWorkbook workbookupdate = null;
+			 File excelFileToUpdate =null;
+			 XSSFSheet testResultSheet = null;
+			 Boolean testResultUpdateSuccessful=false;
+				 
+				 try
+				 {
+					 excelFileToUpdate = new File(globalDeclaration.testResultFile);
+					 
+					 if(excelFileToUpdate.exists() || excelFileToUpdate.canRead())
+					 {
+				 
+							 //
+								 FileInputStream fisUpdateExcel = null;
+							 
+									 try {
+										 fisUpdateExcel = new FileInputStream(excelFileToUpdate);
+									} catch (FileNotFoundException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									 
+									
+									try {
+										workbookupdate = new XSSFWorkbook(fisUpdateExcel);
+									} catch (IOException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+							
+							
+							testResultSheet = workbookupdate.getSheetAt(0);
+							
+							int updateExcelFileTotalRecord = testResultSheet.getLastRowNum();
+							
+							if(updateExcelFileTotalRecord>0)
+							{
+								for(int row=1;row<=updateExcelFileTotalRecord;row++)
+								{
+									String testcaseNumberFromFile = testResultSheet.getRow(row).getCell(0).getStringCellValue();
+									
+									
+									if(testcaseNumberFromFile.equalsIgnoreCase(testcaseNumber))
+									{
+										 testResultSheet.getRow(row).getCell(2).setCellValue(testcaseStatus);
+										 testResultSheet.getRow(row).getCell(3).setCellValue(remark);
+										 testResultUpdateSuccessful=true;
+										 break;
+									}
+								}
+							}
+							else
+							{
+								System.out.println("Test Result file is not created");
+							}
+							//exit for loop
+							if(testResultUpdateSuccessful)
+							{
+													
+								FileOutputStream fos = null;
+								try {
+									fos = new FileOutputStream(excelFileToUpdate);
+								} catch (FileNotFoundException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								try {
+									workbookupdate.write(fos);
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								try {
+									workbookupdate.close();
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+							else
+							{
+								System.out.println("Test case is not found to update");
+							}
+				 }//if
+					 else
+					 {
+						 System.out.println("Test Result file is not exist or it is open. Please check");
+						 globalDeclaration.errorOccured=false;
+					 }
+							
+				 }
+				 catch(Exception e)
+				 {
+					System.out.println("Problem in reading Test Result File");
+					globalDeclaration.errorOccured=true;
+				 }
+							
+							
+							
+							//System.out.println(testResultSheet.getRow(1).getCell(1).getStringCellValue());
+					 }
+		
 	
 			
 }//class

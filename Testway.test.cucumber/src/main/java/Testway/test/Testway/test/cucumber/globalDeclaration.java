@@ -7,6 +7,9 @@ public class globalDeclaration {
 	// Public global declaration file
 	public static String globalDeclarationFile = System.getProperty("user.dir")+"\\inputDataFiles\\globalvariable.xlsx";
 	
+	//Test Result File
+	public static String testResultFile = System.getProperty("user.dir")+"\\inputDataFiles\\TestResult.xlsx";
+	
 	// chromeExePath
 	public static String chromeExePath = System.getProperty("user.dir")+"\\driverExe\\chrome\\chromedriver.exe";
 			
@@ -22,6 +25,13 @@ public class globalDeclaration {
 	public static String visibleExpectedCondition = "visible";
 	
 	public static String clickableExpectedCondition = "clickable";
+	
+	// Test Execution related variable
+	
+	public static String testExecutionPass = "Pass";
+	public static String testExecutionFail = "Fail";
+	public static String testExecutionBlock = "Block";
+	public static String testExecutionNotCompleted = "Nor Completed";
 
 
 }//public class globalDeclaration {

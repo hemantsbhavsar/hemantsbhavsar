@@ -100,11 +100,11 @@ public class CreateOrderStepDef {
 					//Location to Search
 					
 					addressSearch=globalDeclarationSheet.getRow(intRow).getCell(17).getStringCellValue();
-					System.out.println("addressSearch "+addressSearch);
+					
 					
 					
 					subAddressToSelect=globalDeclarationSheet.getRow(intRow).getCell(18).getStringCellValue();
-					System.out.println("subAddressToSelect "+subAddressToSelect);
+					
 					//Location to Search
 					
 					globalDeclaration.errorOccured=false;
@@ -123,11 +123,13 @@ public class CreateOrderStepDef {
 		if(!globalDeclaration.errorOccured)
 		{
 			driver= wdfunction.launchApplicationAndGetDriver(browser, URL);
+			commonfunction.updateTestResult("Test_Case_Number_1", globalDeclaration.testExecutionPass, "Application launch successfully");
 			
 			
 		}
 		else
 		{
+			commonfunction.updateTestResult("Test_Case_Number_1", globalDeclaration.testExecutionFail, "Unable to launch application");
 			commonfunction.ErrorOccuredStatement();
 		}
 		
@@ -155,6 +157,7 @@ public class CreateOrderStepDef {
 			}
 			else
 			{
+				commonfunction.updateTestResult("Test_Case_Number_2", globalDeclaration.testExecutionNotCompleted, "page verification is not successful");
 				System.out.println("LocationSearch page title " + pageTitle + " is not displayed successfully");
 				globalDeclaration.errorOccured=true;
 			}
@@ -176,6 +179,7 @@ public class CreateOrderStepDef {
 		}
 		else
 		{
+			commonfunction.updateTestResult("Test_Case_Number_2", globalDeclaration.testExecutionNotCompleted, "Ubanle to enter sub location to search");
 			commonfunction.ErrorOccuredStatement();
 		}
 		// click on cookie displayed on screen
@@ -187,6 +191,7 @@ public class CreateOrderStepDef {
 		}
 		else
 		{
+			commonfunction.updateTestResult("Test_Case_Number_2", globalDeclaration.testExecutionNotCompleted, "Search using sublocation is not successful");
 			commonfunction.ErrorOccuredStatement();
 		}
 		// Select Address from List
@@ -194,9 +199,11 @@ public class CreateOrderStepDef {
 		{
 			locsearch.SelectAddressFromList(subAddressToSelect);
 			System.out.println("Selected sub Location successfully");
+			commonfunction.updateTestResult("Test_Case_Number_2", globalDeclaration.testExecutionPass, "Location and sublocation is successful");
 		}
 		else
 		{
+			commonfunction.updateTestResult("Test_Case_Number_2", globalDeclaration.testExecutionFail, "Not able to select sub location is not successful");
 			commonfunction.ErrorOccuredStatement();
 		}
 		
@@ -224,12 +231,14 @@ public class CreateOrderStepDef {
 					}
 					else
 					{
+						commonfunction.updateTestResult("Test_Case_Number_3", globalDeclaration.testExecutionFail, "Restaurant page is not displayed correctly");
 						globalDeclaration.errorOccured=true;
 						System.out.println("RestaurantSelection page Verification : RestaurantSelection page is not  displayed successful");
 					}
 				}
 				else
 				{
+					commonfunction.updateTestResult("Test_Case_Number_3", globalDeclaration.testExecutionFail, "Restaurant page is not displayed correctly");
 					commonfunction.ErrorOccuredStatement();
 				}
 				
@@ -251,9 +260,11 @@ public class CreateOrderStepDef {
 				{
 					restaurantExist = restaurantselection.checkAnyRestaurantExistForSelectedLocation();
 					System.out.println("Test Case : Select location having restaurant and displayed properly");
+					commonfunction.updateTestResult("Test_Case_Number_3", globalDeclaration.testExecutionPass, "Restaurant are displayed correctly");
 				}
 				else
 				{
+					commonfunction.updateTestResult("Test_Case_Number_3", globalDeclaration.testExecutionFail, "Restaurant are not displayed correctly");
 					commonfunction.ErrorOccuredStatement();
 				}
 				
@@ -264,15 +275,18 @@ public class CreateOrderStepDef {
 					{
 						restaurantselection.SelectRestaurantAndDisplayMenu(RestaurantName);
 						System.out.println("Test case : Displayed the menu Item successfully");
+						commonfunction.updateTestResult("Test_Case_Number_4", globalDeclaration.testExecutionPass, "Menu Items are displayed correctly");
 					}
 					catch(Exception e)
 					{
+						commonfunction.updateTestResult("Test_Case_Number_4", globalDeclaration.testExecutionFail, "Menu Items are not displayed correctly");
 						System.out.println("Error Occured in dispaying menu Item");
 						commonfunction.ErrorOccuredStatement();
 					}
 				}
 				else
 				{
+					commonfunction.updateTestResult("Test_Case_Number_4", globalDeclaration.testExecutionFail, "Menu Items are not displayed correctly");
 					commonfunction.ErrorOccuredStatement();
 				}
 				
@@ -316,15 +330,18 @@ public class CreateOrderStepDef {
 				System.out.println("Test case : menu Item selected successfully" );
 				ordercreation.PlaceOrder();
 				System.out.println("Test case : Order created  successfully" );
+				commonfunction.updateTestResult("Test_Case_Number_5", globalDeclaration.testExecutionPass, "Selected and order the menu item successfully");
 			}
 			catch(Exception e)
 			{
+				commonfunction.updateTestResult("Test_Case_Number_5", globalDeclaration.testExecutionFail, "Getting problem toplace an order");
 				System.out.println("Error Occured in selecting the menu Item");
 				commonfunction.ErrorOccuredStatement();
 			}
 		}
 		else
 		{
+			commonfunction.updateTestResult("Test_Case_Number_5", globalDeclaration.testExecutionFail, "Getting problem toplace an order");
 			commonfunction.ErrorOccuredStatement();
 		}
 		//place the order
@@ -366,9 +383,11 @@ public class CreateOrderStepDef {
 				{
 					orderandpay.FillFormDetailsAndOrderPay();
 					System.out.println("Personal details are provided successfully");
+					commonfunction.updateTestResult("Test_Case_Number_6", globalDeclaration.testExecutionPass, "Personal details entered successfully and order palced");
 				}
 				catch(Exception e)
 				{
+					commonfunction.updateTestResult("Test_Case_Number_6", globalDeclaration.testExecutionFail, "Personal details not entered successfully and order palced is not");
 					System.out.println("Error Occured while filling up the form details");
 					commonfunction.ErrorOccuredStatement();
 				}
@@ -376,6 +395,7 @@ public class CreateOrderStepDef {
 			}
 			else
 			{
+				commonfunction.updateTestResult("Test_Case_Number_6", globalDeclaration.testExecutionFail, "Personal details not entered successfully and order palced is not");
 				commonfunction.ErrorOccuredStatement();
 			}
 	    
@@ -389,10 +409,12 @@ public class CreateOrderStepDef {
 			try
 			{
 				oderreferencenumberpage.getOrderReference();
+				commonfunction.updateTestResult("Test_Case_Number_7", globalDeclaration.testExecutionPass, "Order reference number generated successfully");
 				
 			}
 			catch(Exception e)
 			{
+				commonfunction.updateTestResult("Test_Case_Number_7", globalDeclaration.testExecutionFail, "Order reference number is not generated successfully");
 				System.out.println("Error Occured generating order reference number");
 				commonfunction.ErrorOccuredStatement();
 			}
